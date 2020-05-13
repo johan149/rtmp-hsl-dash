@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Live</title>
+      <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">
+      <script src="https://vjs.zencdn.net/7.5.5/video.js"></script>
+      <script>
+         videojs.autoSetup();
+         
+         videojs('my_video_1').ready(function(){
+         console.log(this.options()); //log all of the default videojs options
+         
+         // Store the video object
+         var myPlayer = this, id = myPlayer.id();
+         // Make up an aspect ratio
+         var aspectRatio = 264/640; 
+         
+         function resizeVideoJS(){
+         var width = document.getElementById(id).parentElement.offsetWidth;
+         myPlayer.width(width).height( width * aspectRatio );
+         
+         }
+         
+         // Initialize resizeVideoJS()
+         resizeVideoJS();
+         // Then on resize call resizeVideoJS()
+         window.onresize = resizeVideoJS; 
+         });
+      </script>
+   </head>
+   <body>
+      <h1>Live Player</h1>
+      <video id="player" class="video-js vjs-default-skin" controls preload="auto" 
+         data-setup='{ "asdf": true }' poster="https://s2.dmcdn.net/v/QxgFX1TNUnRK3T-GB/x1080" >
+         <source src="https://stream.madetec.co/hls/test.m3u8" type="application/x-mpegURL" />
+      </video>
+      <script>
+         var player = videojs('#player', { "controls": true, "autoplay": true, "preload": "auto" });
+      </script>
+      <div id="footer">
+         <font size="2">SPACENATIVE - LOMA - 2020</font>
+      </div>
+   </body>
+</html>
